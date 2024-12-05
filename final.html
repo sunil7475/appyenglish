@@ -25,11 +25,13 @@
         // Function to send password reset email
         function sendPasswordResetEmail() {
             const emailReset = document.getElementById('emailReset').value;
+            console.log('Sending reset email to:', emailReset); // Debug log
             auth.sendPasswordResetEmail(emailReset)
                 .then(() => {
-                    alert('Password reset email sent!');
+                    alert('Password reset email sent! Please check your inbox.');
                 })
                 .catch((error) => {
+                    console.error('Error sending email:', error); // Debug log for errors
                     alert('Error: ' + error.message);
                 });
         }
@@ -41,7 +43,6 @@
     <button onclick="sendPasswordResetEmail()">Reset Password</button>
 
     <h2>Other Page</h2>
-    <!-- Replace this URL with your actual GitHub Pages or hosted URL -->
-    <iframe src="https://www.github.com/sunil7475/appyenglish/edit/main/finalhtm/your_other_page.html" width="100%" height="400" frameborder="0"></iframe>
+    <iframe src="https://your-hosted-link.com" width="100%" height="400" frameborder="0"></iframe>
 </body>
 </html>
