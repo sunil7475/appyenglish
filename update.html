@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js"></script>
+    <script>
+        const firebaseConfig = { /* Same Firebase config */ };
+
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        async function updateUser() {
+            const userId = document.getElementById("userId").value;
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const email = document.getElementById("email").value;
+
+            if (userId && firstName && lastName && email) {
+                await db.collection("users").doc(userId).update({
+                    firstName,
+                    lastName,
+                    email
+                });
+                alert("User updated successfully!");
+            } else {
+                alert("Please fill all fields.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Update User</h1>
+    <input type="text" id="userId" placeholder="User ID"><br>
+    <input type="text" id="firstName" placeholder="First Name"><br>
+    <input type="text" id="lastName" placeholder="Last Name"><br>
+    <input type="email" id="email" placeholder="Email"><br>
+    <button onclick="updateUser()">Update User</button>
+</body>
+</html>
