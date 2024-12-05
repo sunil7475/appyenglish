@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset</title>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <script>
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAWjh8WhCZ6SwJginmlVqCD4ANwH_1rvAE",
+            authDomain: "appyenglish.firebaseapp.com",
+            projectId: "appyenglish",
+            storageBucket: "appyenglish.appspot.com",
+            messagingSenderId: "492287991028",
+            appId: "1:492287991028:web:f9cb3422390ee8cfc912a1",
+            measurementId: "G-NQEYQR98NK"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Function to send password reset email
+        function sendPasswordResetEmail() {
+            const emailReset = document.getElementById('emailReset').value;
+            auth.sendPasswordResetEmail(emailReset)
+                .then(() => {
+                    alert('Password reset email sent!');
+                })
+                .catch((error) => {
+                    alert('Error: ' + error.message);
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>Password Reset</h1>
+    <input type="email" id="emailReset" placeholder="Enter your email" required>
+    <button onclick="sendPasswordResetEmail()">Reset Password</button>
+
+    <h2>Other Page</h2>
+    <!-- Replace this URL with your actual GitHub Pages or hosted URL -->
+    <iframe src="https://your-github-hosted-link.com/your_other_page.html" width="100%" height="400" frameborder="0"></iframe>
+</body>
+</html>
