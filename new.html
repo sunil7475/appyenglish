@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset</title>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        input[type="email"] {
+            padding: 10px;
+            margin: 10px 0;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Reset Your Password</h2>
+    <input type="email" id="emailReset" placeholder="Enter your email" required>
+    <button id="resetButton">Send Password Reset Link</button>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAWjh8WhCZ6SwJginmlVqCD4ANwH_1rvAE",
+            authDomain: "appyenglish.firebaseapp.com",
+            projectId: "appyenglish",
+            storageBucket: "appyenglish.appspot.com",
+            messagingSenderId: "492287991028",
+            appId: "1:492287991028:web:f9cb3422390ee8cfc912a1",
+            measurementId: "G-NQEYQR98NK"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.getAuth(app);
+
+        document.getElementById('resetButton').addEventListener('click', function() {
+            const email = document.getElementById('emailReset').value;
+            auth.sendPasswordResetEmail(email).then(() => {
+                alert('Password reset email sent!');
+            }).catch((error) => {
+                alert('Error: ' + error.message);
+            });
+        });
+    </script>
+</body>
+</html>
