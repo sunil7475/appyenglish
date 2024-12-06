@@ -10,7 +10,7 @@
 <body>
   <h1>Reset Your Password</h1>
   <p>Enter your email to receive a password reset link:</p>
-  <input type="email" id="emailReset" placeholder="Enter your email" required>
+  <input type="Email" id="emailReset" placeholder="Enter your email" required>
   <button id="resetButton">Send Reset Link</button>
 
   <p id="message"></p>
@@ -32,7 +32,7 @@
     const auth = firebase.getAuth(app);
 
     // Handle Password Reset
-    document.getElementById("resetButton").addEventListener("click", async () => {
+    document.getElementById("Send Reset Link").addEventListener("click", async () => {
       const email = document.getElementById("emailReset").value;
       const messageElement = document.getElementById("message");
 
