@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Reset</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    input, button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    #message {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Forgot Password</h1>
+  <p>Enter your email to receive a password reset link:</p>
+  <input type="email" id="emailReset" placeholder="Enter your email" required>
+  <button id="resetButton">Send Reset Link</button>
+
+  <p id="message"></p>
+
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAWjh8WhCZ6SwJginmlVqCD4ANwH_1rvAE",
+  authDomain: "appyenglish.firebaseapp.com",
+  projectId: "appyenglish",
+  storageBucket: "appyenglish.firebasestorage.app",
+  messagingSenderId: "492287991028",
+  appId: "1:492287991028:web:f9cb3422390ee8cfc912a1",
+  measurementId: "G-NQEYQR98NK"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.getAuth(app);
+
+    // Handle Password Reset
+    document.getElementById("resetButton").addEventListener("click", async () => {
+      const email = document.getElementById("emailReset").value;
+      const messageElement = document.getElementById("message");
+
+      if (!email) {
+        messageElement.textContent = "Please enter a valid email address.";
+        messageElement.style.color = "red";
+        return;
+      }
+
+      try {
+        await firebase.sendPasswordResetEmail(auth, email);
+        messageElement.textContent = "Password reset email sent successfully!";
+        messageElement.style.color = "green";
+      } catch (error) {
+        messageElement.textContent = `Error: ${error.message}`;
+        messageElement.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>
