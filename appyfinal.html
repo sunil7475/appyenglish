@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset</title>
+    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js"></script>
+</head>
+<body>
+    <h1>Reset Password</h1>
+    <input type="email" id="emailReset" placeholder="Enter your email" required>
+    <button id="resetButton">Send Reset Link</button>
+    <p id="message"></p>
+
+    <script>
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAWjh8WhCZ6SwJginmlVqCD4ANwH_1rvAE",
+  authDomain: "appyenglish.firebaseapp.com",
+  projectId: "appyenglish",
+  storageBucket: "appyenglish.firebasestorage.app",
+  messagingSenderId: "492287991028",
+  appId: "1:492287991028:web:f9cb3422390ee8cfc912a1",
+  measurementId: "G-NQEYQR98NK"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Function to create the reset link
+        function createResetLink(email) {
+            const baseUrl = "https://sunil7475.github.io/appyenglish/appyfinal.html?email=";
+            return baseUrl + encodeURIComponent(email);
+        }
+
+        // Handle password reset email sending
+        document.getElementById('resetButton').onclick = function() {
+            const email = document.getElementById('emailReset').value; // Get email input
+            const reset = createResetLink(email); // Store the reset link in the variable `reset`
+
+            auth.sendPasswordResetEmail(email)
+                .then(() => {
+                    // Handle successful password reset email sending
+                    document.getElementById('message').innerText = 'Password reset email sent! Check your inbox for the link.';
+                    console.log("Reset link: ", reset); // Log the link for debugging
+                })
+                .catch((error) => {
+                    // Handle Errors here
+                    document.getElementById('message').innerText = error.message;
+                });
+        };
+    </script>
+</body>
+</html>
